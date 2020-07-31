@@ -1,0 +1,2 @@
+export { FilterableProductTable } from './FilterableProductTable'
+

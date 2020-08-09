@@ -1,30 +1,28 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useState, setState, useEffect } from 'react'
 
 import { ProductTable } from './ProductTable'
 import { SearchBar } from './SearchBar'
 
 import api from "api"
 
-export class FilterableProductTable extends React.Component  {
-  state = {
-    searchText : "",
-    products: [],
-  }
+export const FilterableProductTable = () => {
 
-  async componentDidMount() {
-    this.setState({ products: await api.index() })
-  }
+const [products, setProducts] = useState([])
 
 
+   useEffect(() => {
+  (async () => {
+    setProducts(await api.index())
+  })()
+}, [])
 
-  render () {
+
     return (
       <Fragment>
-        <p>FilterableProductTable</p>
-        <ProductTable />
         <SearchBar />
+        <ProductTable />
       </Fragment>
     )
-  }
+
 }
 
